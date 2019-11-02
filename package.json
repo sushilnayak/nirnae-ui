@@ -5,7 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html"
+    "clean": "rimraf .cache dist",
+    "test": "jest",
+    "test:update": "jest -u",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+    "format": "prettier --write \"src/**/*.{js,jsx}\"",
+    "build": "npm run clean && parcel build src/index.html"
   },
   "keywords": [],
   "author": "",
@@ -21,7 +27,11 @@
     "react-dom": "^16.11.0"
   },
   "devDependencies": {
+    "@testing-library/react": "^9.3.1",
+    "jest": "^24.9.0",
     "parcel-bundler": "^1.12.4",
+    "parcel-plugin-bundle-visualiser": "^1.2.0",
+    "prettier": "^1.18.2",
     "rimraf": "^3.0.0",
     "sass": "^1.23.2"
   }

@@ -1,0 +1,33 @@
+.component-drawer{
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  margin: 5px;
+
+  .input-container{
+
+    input[type="text"]{
+      margin-left: 2.5px;
+      margin-top: 2.5px;
+      margin-bottom: 2.5px;
+      width: calc(100% - 10px);
+    }
+  }
+
+  .component-container{
+    [class^="component-type-"]{
+      margin-top: 2.5px;
+      ul{
+        padding: 0;
+        margin: 0;
+
+        li{
+          margin-top: 10px;
+          list-style: none;
+          width: 150px;
+        }
+      }
+    }
+  }
+
+}
