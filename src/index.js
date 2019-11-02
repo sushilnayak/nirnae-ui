@@ -1,16 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { render } from "react-dom";
 import "./styles/index.scss";
-import { EditorCanvas, EditorFooter, EditorHeader, EditorLeftSidebar, EditorRightSidebar } from "./components/editor";
+import {
+  EditorCanvas,
+  EditorFooter,
+  EditorHeader,
+  EditorLeftSidebar,
+  EditorRightSidebar
+} from "./components/editor";
+import EditorContext, {
+  editorContextDefaultValue
+} from "./context/EditorContext";
 
 function App() {
-  return <div className={"editor"}>
-    <EditorHeader/>
-    <EditorLeftSidebar/>
-    <EditorCanvas/>
-    <EditorRightSidebar/>
-    <EditorFooter/>
-  </div>;
+  const editorContextState = useState(editorContextDefaultValue);
+
+  return (
+    <div className={"editor"}>
+      <EditorContext.Provider value={editorContextState}>
+        <EditorHeader />
+        <EditorLeftSidebar />
+        <EditorCanvas />
+        <EditorRightSidebar />
+        <EditorFooter />
+      </EditorContext.Provider>
+    </div>
+  );
 }
 
-render(<App/>, document.getElementById("root"));
+render(<App />, document.getElementById("root"));

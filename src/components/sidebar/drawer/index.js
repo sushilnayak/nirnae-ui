@@ -5,7 +5,7 @@ import WarningAndErrorDrawer from "./WarningAndErrorDrawer";
 import StatisticsDrawer from "./StatisticsDrawer";
 import ControlFlowDrawer from "./ControlFlowDrawer";
 
-export  {
+export {
   ComponentDrawer,
   ProjectDrawer,
   StatusDrawer,

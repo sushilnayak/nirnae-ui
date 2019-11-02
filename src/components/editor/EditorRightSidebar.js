@@ -1,15 +1,46 @@
-import React, {Fragment} from 'react'
+import React, { Fragment, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCog } from "@fortawesome/free-solid-svg-icons/faCog";
+import { faInfo } from "@fortawesome/free-solid-svg-icons/faInfo";
+import { faBug } from "@fortawesome/free-solid-svg-icons/faBug";
 
-export default function EditorRightSidebar() {
-  return <Fragment>
-    <div className={"sidebar-right noselect"}>
-      <div className={"rotate-right"}>
-        <div><span><FontAwesomeIcon size="sm" icon={faCog}/></span>Maven</div>
-        <div><span><FontAwesomeIcon size="sm" icon={faCog}/></span>Gradle</div>
-      </div>
-    </div>
-  </Fragment>;
+function closeAllSideDrawer(drawers) {
+  drawers.forEach(x => x(false));
 }
 
+export default function EditorRightSidebar() {
+  const [infoSidebar, setInfoSidebar] = useState(false);
+  const [debugSidebar, setDebugSidebar] = useState(false);
+
+  const rightSideDrawersSetters = [setInfoSidebar, setDebugSidebar];
+
+  return (
+    <Fragment>
+      <div className={"sidebar-right noselect"}>
+        <div className={"rotate-right"}>
+          <div style={{ backgroundColor: infoSidebar ? "#BDBDBD" : "" }}
+               onClick={() => {
+                 closeAllSideDrawer(rightSideDrawersSetters)
+                 setInfoSidebar(!infoSidebar)
+               }}>
+            <span>
+              <FontAwesomeIcon size="sm" icon={faInfo}/>
+            </span>
+            Info
+          </div>
+          <div style={{ backgroundColor: debugSidebar ? "#BDBDBD" : "" }}
+               onClick={() => {
+                 closeAllSideDrawer(rightSideDrawersSetters)
+                 setDebugSidebar(!debugSidebar)
+               }}>
+            <span>
+              <FontAwesomeIcon size="sm" icon={faBug}/>
+            </span>
+            Debug
+          </div>
+        </div>
+      </div>
+      {infoSidebar && <div className="right-side-drawer"></div>}
+      {debugSidebar && <div className="right-side-drawer"></div>}
+    </Fragment>
+  );
+}

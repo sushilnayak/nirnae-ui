@@ -1,12 +1,12 @@
-.component-drawer{
+.component-drawer {
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
   margin: 5px;
+  width: 170px;
 
-  .input-container{
-
-    input[type="text"]{
+  .input-container {
+    input[type="text"] {
       margin-left: 2.5px;
       margin-top: 2.5px;
       margin-bottom: 2.5px;
@@ -14,17 +14,37 @@
     }
   }
 
-  .component-container{
-    [class^="component-type-"]{
-      margin-top: 2.5px;
-      ul{
-        padding: 0;
-        margin: 0;
+  .component-container {
 
-        li{
-          margin-top: 10px;
-          list-style: none;
-          width: 150px;
+    [class^="component-type-"] {
+      margin-top: 2.5px;
+      background-color: lightgrey;
+
+      .component-type-header {
+        height: 2rem;
+        text-align: center;
+        line-height: 2rem;
+        background: #f3f3f3;
+        user-select: none
+      }
+
+      ul {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        list-style: none;
+        border: 1px solid #f3f3f3;
+        background-color: white;
+
+        li {
+          margin: 10px 10px;
+          background-color: white;
+          //width: 150px;
+          height: 2em;
+          line-height: 2em;
+          align-content: center;
+          text-align: center;
+          border-radius: .25rem;
         }
       }
     }

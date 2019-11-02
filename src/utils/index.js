@@ -1,5 +1,5 @@
-import * as color from './color'
+import * as color from "./color";
 
 export default {
   ...color
-}
+};
