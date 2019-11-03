@@ -10,6 +10,7 @@ export default function ComponentDrawer() {
       <div className={"input-container"}>
         <input
           type={"text"}
+          placeholder={"Search Component..."}
           defaultValue={search}
           onChange={e => {
             e.preventDefault();

@@ -1,6 +1,9 @@
+@import "variables";
 @import "initial";
+@import "color-themes";
+@import "app";
+@import "app-settings";
 @import "editor";
-//@import "app";
 @import "canvas";
 @import "drawer";
-@import "component-builder";
+@import "builder-components";

@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfo } from "@fortawesome/free-solid-svg-icons/faInfo";
 import { faBug } from "@fortawesome/free-solid-svg-icons/faBug";
+import {InformationDrawer} from "../sidebar/drawer";
 
 function closeAllSideDrawer(drawers) {
   drawers.forEach(x => x(false));
@@ -39,7 +40,9 @@ export default function EditorRightSidebar() {
           </div>
         </div>
       </div>
-      {infoSidebar && <div className="right-side-drawer"></div>}
+      {infoSidebar && <div className="right-side-drawer">
+        <InformationDrawer />
+      </div>}
       {debugSidebar && <div className="right-side-drawer"></div>}
     </Fragment>
   );
