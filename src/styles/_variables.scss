@@ -1,9 +1,38 @@
-$menu-light-bg : #F2F2F2;
-$light-bg : #727272;
-$light-border: #CDCDCD;
-$text-light-color : white;
+$default-editor-header-bg: #F2F2F2;
+$default-editor-header-text: black;
+$default-editor-header-border: #CDCDCD;
 
-$menu-dark-bg : #3C3F41;
-$dark-bg : #2B2B2B;
-$dark-border: #323232;
-$text-dark-color : #BBBBBB;
+$default-editor-subheader-bg: #F2F2F2;
+$default-editor-subheader-text: black;
+$default-editor-subheader-border: #CDCDCD;
+
+$default-editor-sidebar-hover-bg: #D9D9D9;
+$default-editor-sidebar-hover-text: black;
+$default-editor-sidebar-hover-border: #323232;
+
+$default-editor-sidebar-selected-bg: #BDBDBD;
+$default-editor-sidebar-selected-text: black;
+$default-editor-sidebar-selected-border: #C9C9C9;
+
+$default-editor-main-bg: #B6B6B6;
+$default-editor-main-text: #505050;
+
+//Dark
+$dark-editor-header-bg: #3C3F41;
+$dark-editor-header-text: #BBBBBB;
+$dark-editor-header-border: #515151;
+
+$dark-editor-subheader-bg: #3C3F41;
+$dark-editor-subheader-text: #BBBBBB;
+$dark-editor-subheader-border: #515151;
+
+$dark-editor-sidebar-hover-bg: #353739;
+$dark-editor-sidebar-hover-text: #BBBBBB;
+$dark-editor-sidebar-hover-border: #323232;
+
+$dark-editor-sidebar-selected-bg: #2D2F30;
+$dark-editor-sidebar-selected-text: white;;
+$dark-editor-sidebar-selected-border: #323232;
+
+$dark-editor-main-bg: #282828;
+$dark-editor-main-text: #9F9F8D;

@@ -3,7 +3,7 @@
   flex-flow: column nowrap;
   justify-content: flex-start;
   margin: 5px;
-  width: 170px;
+  //width: 170px;
 
   .input-container {
     input[type="text"] {
@@ -50,9 +50,4 @@
     }
   }
 
-}
-
-.information-drawer{
-  direction: initial;
-  padding: 10px;
 }

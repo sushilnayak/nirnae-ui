@@ -1,0 +1,52 @@
+.app-header {
+  height: 25px;
+  line-height: 25px;
+  align-content: center;
+  width: 100%;
+  background-color: indigo;
+  color: white;
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+
+  .navigation-right, .navigation-left {
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-flow: row nowrap;
+
+      li {
+        //padding: 0 10px;
+
+
+        text-align: center;
+
+        &:hover {
+          //background-color: #adf;
+          background-color: lighten(#337ab7, 10%);
+        }
+
+        .active {
+          background-color: #337ab7;
+        }
+
+        a {
+          text-decoration: none;
+          display: inline-block;
+          color: white;
+          white-space: nowrap;
+          padding: 0 15px;
+
+
+          span {
+            padding-left: 10px;
+          }
+        }
+
+      }
+    }
+  }
+}

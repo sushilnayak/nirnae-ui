@@ -1,13 +1,25 @@
-import React, { useState } from "react";
-import ApplicationContext, { applicationContextDefaultValue } from "./context/ApplicationContext";
-import { AppContent, AppHeader } from "./components/app";
+import React from "react";
+import { Link, Router } from "@reach/router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function App() {
-  const applicationState = useState(applicationContextDefaultValue);
-  return <ApplicationContext.Provider value={applicationState}>
-    <div className={"app " + (applicationState[0].darkMode ? "theme--dark" : "theme--default")}>
-      <AppHeader/>
-      <AppContent/>
+import { faEdit } from "@fortawesome/free-solid-svg-icons/faEdit";
+import { faHistory } from "@fortawesome/free-solid-svg-icons/faHistory";
+import { faTasks } from "@fortawesome/free-solid-svg-icons/faTasks";
+import { faHome } from "@fortawesome/free-solid-svg-icons/faHome";
+import { faCog } from "@fortawesome/free-solid-svg-icons/faCog";
+import {EditorContentArea, EditorHeader, EditorLeftSide, EditorRightSide} from "./components/editor";
+import Settings from "./components/settings";
+import Home from "./components/home";
+import Reports from "./components/reports";
+import Executions from "./components/executions";
+import {AppContent, AppHeader} from "./components/app";
+
+
+function App() {
+    return <div id={"app"}>
+        <AppHeader />
+        <AppContent />
     </div>
-  </ApplicationContext.Provider>;
 }
+
+export default App

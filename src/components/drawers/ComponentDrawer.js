@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { componentList, FillColor, StrokeColor } from "../../../utils/color";
+import { componentList, FillColor, StrokeColor } from "../../utils/color";
 
 export default function ComponentDrawer() {
   // const [showDetail , setShowDetail ] = useState(false)

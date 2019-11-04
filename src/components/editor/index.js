@@ -1,13 +1,13 @@
 import EditorHeader from "./EditorHeader";
-import EditorRightSidebar from "./EditorRightSidebar";
-import EditorFooter from "./EditorFooter";
-import EditorLeftSidebar from "./EditorLeftSidebar";
-import EditorCanvas from "./EditorCanvas";
+import EditorLeftSide from './EditorLeftSide'
+import EditorRightSide from './EditorRightSide'
+import EditorContentArea from './EditorContentArea'
+import Editor from "./Editor";
 
 export {
-  EditorHeader,
-  EditorRightSidebar,
-  EditorLeftSidebar,
-  EditorCanvas,
-  EditorFooter
+    Editor,
+    EditorHeader,
+    EditorLeftSide,
+    EditorContentArea,
+    EditorRightSide
 };

@@ -13,7 +13,7 @@ export default function EditorHeader() {
 
   return (
     <Fragment>
-      <div className={"header noselect"}>
+      <div className={"app-editor-header noselect"}>
         <ul>
           <li>
             File
@@ -44,9 +44,9 @@ export default function EditorHeader() {
         </ul>
       </div>
 
-      <div className={"sub-header noselect"}>
-        <div className={"sub-header-left"}></div>
-        <div className={"sub-header-right"}>
+      <div className={"app-editor-sub-header noselect"}>
+        <div className={"app-editor-sub-header-left"} />
+        <div className={"app-editor-sub-header-right"}>
           <div>
             <span style={{ color: "green" }}>
               <FontAwesomeIcon size="sm" icon={faServer} />

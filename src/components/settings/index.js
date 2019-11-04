@@ -1,11 +1,7 @@
 import { Label } from "../../builder-components";
 import React, { useContext } from "react";
-import ApplicationContext from "../../context/ApplicationContext";
-
 
 export default function Settings() {
-
-  const [appContext, setAppContext] = useContext(ApplicationContext)
 
   return <div className={"app-settings"}>
     <div style={{margin: "0px"}}><h4>Sushil Nayak</h4></div>

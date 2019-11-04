@@ -1,17 +1,50 @@
-$bg: 'bg';
-$menu-bg: 'menu-bg';
-$text-color: 'text-color';
+$editor-header-bg: 'editor-header-bg';
+$editor-header-text: 'editor-header-text';
+$editor-header-border: 'editor-header-border';
+$editor-subheader-bg: 'editor-subheader-bg';
+$editor-subheader-text: 'editor-subheader-text';
+$editor-subheader-border: 'editor-subheader-border';
+$editor-sidebar-hover-bg: 'editor-sidebar-hover-bg';
+$editor-sidebar-hover-text: 'editor-sidebar-hover-text';
+$editor-sidebar-hover-border: 'editor-sidebar-hover-border';
+$editor-sidebar-selected-bg: 'editor-sidebar-selected-bg';
+$editor-sidebar-selected-text: 'editor-sidebar-selected-text';
+$editor-sidebar-selected-border: 'editor-sidebar-selected-border';
+$editor-main-bg: 'editor-main-bg';
+$editor-main-text: 'editor-main-text';
 
 $themes: (
         default: (
-                menu-bg: $menu-light-bg,
-                bg: $light-bg,
-                text-color: $text-light-color,
+                editor-header-bg : $default-editor-header-bg,
+                editor-header-text : $default-editor-header-text,
+                editor-header-border : $default-editor-header-border,
+                editor-subheader-bg : $default-editor-subheader-bg,
+                editor-subheader-text : $default-editor-subheader-text,
+                editor-subheader-border : $default-editor-subheader-border,
+                editor-sidebar-hover-bg : $default-editor-sidebar-hover-bg,
+                editor-sidebar-hover-text : $default-editor-sidebar-hover-text,
+                editor-sidebar-hover-border : $default-editor-sidebar-hover-border,
+                editor-sidebar-selected-bg : $default-editor-sidebar-selected-bg,
+                editor-sidebar-selected-text : $default-editor-sidebar-selected-text,
+                editor-sidebar-selected-border : $default-editor-sidebar-selected-border,
+                editor-main-bg : $default-editor-main-bg,
+                editor-main-text : $default-editor-main-text
         ),
         dark: (
-                menu-bg: $menu-dark-bg,
-                bg: $dark-bg,
-                text-color: $text-dark-color,
+                editor-header-bg : $dark-editor-header-bg,
+                editor-header-text : $dark-editor-header-text,
+                editor-header-border : $dark-editor-header-border,
+                editor-subheader-bg : $dark-editor-subheader-bg,
+                editor-subheader-text : $dark-editor-subheader-text,
+                editor-subheader-border : $dark-editor-subheader-border,
+                editor-sidebar-hover-bg : $dark-editor-sidebar-hover-bg,
+                editor-sidebar-hover-text : $dark-editor-sidebar-hover-text,
+                editor-sidebar-hover-border : $dark-editor-sidebar-hover-border,
+                editor-sidebar-selected-bg : $dark-editor-sidebar-selected-bg,
+                editor-sidebar-selected-text : $dark-editor-sidebar-selected-text,
+                editor-sidebar-selected-border : $dark-editor-sidebar-selected-border,
+                editor-main-bg : $dark-editor-main-bg,
+                editor-main-text : $dark-editor-main-text
         ),
 );
 

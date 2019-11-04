@@ -11,7 +11,7 @@
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
-    "build": "npm run clean && parcel build src/index.html"
+    "build": "npm run clean && parcel build --no-source-maps src/index.html"
   },
   "keywords": [],
   "author": "",
@@ -27,7 +27,13 @@
     "re-resizable": "^6.1.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-markdown": "^4.2.2"
+    "react-markdown": "^4.2.2",
+    "react-redux": "^7.1.1",
+    "redux": "^4.0.4",
+    "redux-actions": "^2.6.5",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
+    "redux-saga": "^1.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
