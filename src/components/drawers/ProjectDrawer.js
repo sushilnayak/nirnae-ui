@@ -1,13 +1,54 @@
-import React, { Fragment } from "react";
+import React, {useRef, useState, useEffect} from "react";
+import {connect} from 'react-redux'
+import Modal from "../../common/Modal";
+import {contentAreaWorkspaceCreateNewTab} from "../../actions/contentArea";
 
-export default function ProjectDrawer() {
-    return <Fragment>
-        <h3>Projects</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat.</p>
-        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-            laborum.</p>
-    </Fragment>;
+const mapStateToProps = (props) => ({})
+const mapDispatchToProps = dispatch => ({
+    contentAreaWorkspaceCreateNewTab: (data) => dispatch(contentAreaWorkspaceCreateNewTab(data))
+})
+
+function ProjectDrawer(props) {
+
+    const [showNewProjectModal, setShowNewProjectModal] = useState(false)
+    const inputRef = useRef(null)
+
+    useEffect(()=>{
+        if( showNewProjectModal) inputRef.current.focus()
+    },[showNewProjectModal])
+
+    return <div className={"project-drawer"}>
+        <h3>Dummy Projects</h3>
+        <button onClick={(e) => {
+            e.preventDefault();
+            setShowNewProjectModal(!showNewProjectModal)
+        }}>Create New Project
+        </button>
+
+        {showNewProjectModal && (
+            <Modal onClick={() => setShowNewProjectModal(!showNewProjectModal)}>
+                <div className="modal-content new-project-modal"  onKeyDown={(e) => e.keyCode===27 ? setShowNewProjectModal(!showNewProjectModal) : null}>
+                    <div>
+                        <span className="close" onClick={() => setShowNewProjectModal(!showNewProjectModal)}>
+                      &times;
+                    </span>
+                    </div>
+                    <div className={"content"}>
+                        <p>Enter Project Name</p>
+                        <input type={"text"} placeholder={"Project Name..."} ref={inputRef}/>
+                    </div>
+                    <div className={"button-group"}>
+                        <button onClick={() => {
+                            props.contentAreaWorkspaceCreateNewTab(inputRef.current.value)
+                            setShowNewProjectModal(!showNewProjectModal)
+                        }}>Create
+                        </button>
+                        <button onClick={() => setShowNewProjectModal(!showNewProjectModal)}>Cancel</button>
+                    </div>
+                </div>
+            </Modal>
+        )}
+    </div>;
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectDrawer)

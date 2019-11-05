@@ -6,5 +6,10 @@
 @import "app/app-header";
 @import "app/editor/app-editor";
 
+@import "app/canvas";
+
 @import "app/drawer/component_drawer";
 @import "app/drawer/information_drawer";
+@import "app/drawer/project_drawer";
+
+@import "app/app-modal";

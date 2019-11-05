@@ -1,7 +1,7 @@
 import editor from "./editor";
-import canvas from "./canvas";
+import contentArea from "./contentArea";
 
 export default {
   ...editor,
-  ...canvas
+  ...contentArea
 };
