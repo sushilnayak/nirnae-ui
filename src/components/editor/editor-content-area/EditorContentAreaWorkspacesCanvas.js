@@ -29,31 +29,32 @@ function EditorContentAreaWorkspacesCanvas(props) {
 
     useEffect(()=>{
         console.log("Tab Loaded!!")
-        // canvas=new Canvas(canvasRef.current)
         canvas.current=new ChartGenerator(activeEditortab, canvasRef, canvasRef.current.clientWidth, canvasRef.current.clientHeight);
+
+        canvas.current.width = canvas.current.clientWidth;
+        canvas.current.height = canvas.current.clientHeight;
+        // let activeNodes = editorTabCanvas[activeEditortab].activeNodes;
+        // let activeLinks = editorTabCanvas[activeEditortab].activeLinks;
+        // console.log(activeNodes)
+        // console.log(activeLinks)
+        // canvas.current.setActiveNodes(activeNodes);
+        // canvas.current.setActiveLinks(activeLinks);
+
+        // canvas.current.redraw()
+        return ()=> canvas.current=null
+    },[])
+
+    useEffect(()=>{
 
         let activeNodes = editorTabCanvas[activeEditortab].activeNodes;
         let activeLinks = editorTabCanvas[activeEditortab].activeLinks;
-        console.log(activeNodes)
-        console.log(activeLinks)
+
         canvas.current.setActiveNodes(activeNodes);
         canvas.current.setActiveLinks(activeLinks);
 
         canvas.current.redraw()
-        return ()=> canvas.current=null
-    },[activeEditortab ])
 
-    // useEffect(()=>{
-    //
-    //     let activeNodes = editorTabCanvas[activeEditortab].activeNodes;
-    //     let activeLinks = editorTabCanvas[activeEditortab].activeLinks;
-    //
-    //     canvas.current.setActiveNodes(activeNodes);
-    //     canvas.current.setActiveLinks(activeLinks);
-    //
-    //     canvas.current.redraw()
-    //
-    // },[editorTabCanvas, activeEditortab, editorTabCanvas[activeEditortab].activeLinks,editorTabCanvas[activeEditortab].activeNodes ])
+    },[editorTabCanvas, activeEditortab, editorTabCanvas[activeEditortab].activeLinks,editorTabCanvas[activeEditortab].activeNodes ])
 
     onDrop = (event) => {
         console.log("canvas")
@@ -91,6 +92,7 @@ function EditorContentAreaWorkspacesCanvas(props) {
                 ref={canvasRef}
                 onDragOver={onDragOver}
                 onDrop={onDrop}
+                style={{ width: "100%", height: "100%" }}
     />
 }
 

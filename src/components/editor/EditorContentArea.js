@@ -30,10 +30,10 @@ function EditorContentArea(props) {
     };
 
     // style.gridTemplateRows = canvasBottomBar ? `auto 30vh` : `auto 20px`
-    style.gridTemplateColumns = editorLeftSidebar ? (editorComponentSidebar ? `${editorComponentSidebarWidth} auto` : `${editorProjectSidebarWidth} auto`) : `auto`
+    style.gridTemplateColumns = editorLeftSidebar ? (editorComponentSidebar ? `${editorComponentSidebarWidth} repeat(auto-fit, minmax(100px, 1fr))` : `${editorProjectSidebarWidth}  repeat(auto-fit, minmax(100px, 1fr))`) : `repeat(auto-fit, minmax(100px, 1fr))`
     // style.gridTemplateAreas = editorLeftSidebar ? style.gridTemplateAreas : `"app-editor-content-area-canvas" "app-editor-content-area-bottom-bar"`
     style.gridTemplateAreas = editorLeftSidebar ? style.gridTemplateAreas : `"app-editor-content-area-workspaces"`
-
+    console.log(style.gridTemplateColumns)
     return <div className={"app-editor-content-area"} style={style}>
         {editorLeftSidebar && <div className={"app-editor-content-area-left-sidebar"}>
             {editorComponentSidebar && <ComponentDrawer/>}

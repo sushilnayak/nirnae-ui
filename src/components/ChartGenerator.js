@@ -6,7 +6,7 @@ import { CANVAS_STATUS } from './../types';
 import { FillColor, StrokeColor } from './../utils/color';
 
 function ChartGenerator(graphId, chartRef, canvasWidth, canvasHeight, gridSize = 20) {
-
+  console.log("Chart initialized")
   this.PORT_TYPE_INPUT = 1;
   this.PORT_TYPE_OUTPUT = 0;
 
@@ -40,8 +40,8 @@ function ChartGenerator(graphId, chartRef, canvasWidth, canvasHeight, gridSize =
   this.ghostNode = null;
   this.quickAddLink = null;
 
-  this.canvasWidth = canvasWidth;
-  this.canvasHeight = canvasHeight;
+  this.canvasWidth = 1500;
+  this.canvasHeight = 800;
   this.gridSize = gridSize;
 
   this.moving_set = [];
@@ -56,6 +56,8 @@ function ChartGenerator(graphId, chartRef, canvasWidth, canvasHeight, gridSize =
     .attr('class', 'outerCanvas')
     .attr('width', this.canvasWidth)
     .attr('height', this.canvasHeight)
+    // .attr('width', 1300)
+    // .attr('height', 900)
     // .attr("pointer-events", "all")
     .style('cursor', 'crosshair')
     .on('contextmenu', function() {
@@ -536,41 +538,49 @@ ChartGenerator.prototype.redraw = function() {
     d3.select(this).classed('active', false);
   }
 
-  let link = that.linkLayer.selectAll('.link')
-    .data(that.activeLinks
-      // , function(e) {
-      //   console.log(e.source.id + ':' + e.sourcePort + ':' + e.target.id + ':' + e.target.i);
-      //   return e.source.id + ':' + e.sourcePort + ':' + e.target.id + ':' + e.target.i;
-      // }
-    );
+  let link = that.linkLayer.selectAll('path').data(that.activeLinks);
 
-  let linkEnter = link.enter().insert('g', '.node').attr('class', 'link')
+  link.exit().remove()
 
-  linkEnter.each(function(_d, i) {
-    var l = d3.select(this);
-    _d.added = true;
-    l.append('path')
-      .attr('class', 'link_background link_path')
-      .on("mousedown",function(d) {
-        console.log(d)
-      })
-      // .on('mousemove', function(d, i) {
-      //   console.log('link-path-mousemove ' + i);
-      // });
+  link.transition().duration(500).attr('class', 'link').attr('class', 'link_background link_path').attr('d', function(_d) {
+    var numOutputs = _d.source.outputs || 1;
+    var sourcePort = _d.sourcePort || 0;
+    var y = -((numOutputs - 1) / 2) * 13 + 13 * sourcePort;
+    _d.x1 = _d.source.x + _d.source.w;
+    _d.y1 = _d.source.y + _d.source.h / 2;
+    _d.x2 = _d.target.x;
+    _d.y2 = _d.target.y + _d.target.h / 2;
+
+    // return "M "+d.x1+" "+d.y1+
+    //     " C "+(d.x1+scale*node_width)+" "+(d.y1+scaleY*node_height)+" "+
+    //     (d.x2-scale*node_width)+" "+(d.y2-scaleY*node_height)+" "+
+    //     d.x2+" "+d.y2;
+    console.log(_d)
+    var path = that.generateLinkPath(_d.x1, _d.y1, _d.x2, _d.y2, 1);
+
+    // that.generateLinkPath((drag_line.node.x + sc * drag_line.node.w / 2) + drag_line.node.w / 2, drag_line.node.y + (that.node_height / 2), mousePos[0], mousePos[1], sc));
+
+    if (/NaN/.test(path)) {
+      return '';
+    }
+    return path;
   });
 
-  link.exit().remove();
-  var links = that.linkLayer.selectAll('.link_path');
-  links.each(function(_d) {
+  // let linkEnter = link.enter().append("path").attr('class', 'link').attr('class', 'link_background link_path')
 
-    var link = d3.select(this);
-    if (_d.added || _d === that.selected_link || _d.selected) {
-      if (/link_line/.test(link.attr('class'))) {
-        link.classed('link_subflow', function(_d) {
-          return !_d.link;
-        });
-      }
-      link.attr('d', function(_d) {
+  // var links = that.linkLayer.selectAll('.link_path');
+
+  // links.each(function(_d) {
+
+    // var link = d3.select(this);
+    // if (_d.added || _d === that.selected_link || _d.selected) {
+    //   if (/link_line/.test(link.attr('class'))) {
+    //     link.classed('link_subflow', function(_d) {
+    //       return !_d.link;
+    //     });
+    //   }
+  link.enter().append("path").attr('class', 'link').attr('class', 'link_background link_path')
+      .attr('d', function(_d) {
         var numOutputs = _d.source.outputs || 1;
         var sourcePort = _d.sourcePort || 0;
         var y = -((numOutputs - 1) / 2) * 13 + 13 * sourcePort;
@@ -592,8 +602,8 @@ ChartGenerator.prototype.redraw = function() {
         }
         return path;
       });
-    }
-  });
+  //   }
+  // });
 
   link.classed('link_selected', function(d) {
     return d === that.selected_link || d.selected;

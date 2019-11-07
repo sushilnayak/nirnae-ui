@@ -210,7 +210,8 @@
       //overflow-y: scroll;
       //overflow-x: scroll;
       display: grid;
-      grid-template-columns: auto;
+      //grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(100vh, 1fr));
       grid-template-rows: 25px auto 20px;
       grid-template-areas: "app-editor-content-area-workspaces-tabs" "app-editor-content-area-workspaces-canvas" "app-editor-content-area-workspaces-footer";
 
@@ -252,23 +253,26 @@
       .app-editor-content-area-workspaces-canvas{
         grid-area: app-editor-content-area-workspaces-canvas;
         //background-color: orange;
+        overflow-y: scroll;
+        overflow-x: scroll;
       }
 
       .app-editor-content-area-workspaces-footer{
         grid-area: app-editor-content-area-workspaces-footer;
         //background-color: lightseagreen;
         background-color: #F2F2F2;
-
           .footer-bar{
-            border-top: 0.5px solid #BDBDBD;
 
+            border-top: 1px solid #BDBDBD;
+            div:first-child{
+              margin-left: 10px;
+            }
             div{
               background-color: #F2F2F2;
               //margin-left: 2.5px;
               cursor: pointer;
               padding: 0 10px;
               white-space: nowrap;
-              height: 20px;
               display: inline-flex;
 
               .selected {
@@ -292,6 +296,8 @@
             //border-top: 0.5px solid #BDBDBD;
             overflow-y: scroll;
             height: calc(30vh - 20px);
+            //width: calc(208vh - 40px);
+            width: 100%;
           }
       }
     }

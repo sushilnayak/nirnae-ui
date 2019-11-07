@@ -39,7 +39,7 @@ function EditorContentAreaWorkspacesFooter(props) {
             {canvasControlFlowBar && <ControlFlowDrawer/>}
         </div>}
 
-        <div className={"footer-bar"}>
+        <div className={"footer-bar noselect"}>
             <div style={{backgroundColor: canvasStatusBar ? "#BDBDBD" : ""}} onClick={props.canvasStatusBar}>
                 <span><FontAwesomeIcon size="sm" icon={faCheck}/></span>Status
             </div>

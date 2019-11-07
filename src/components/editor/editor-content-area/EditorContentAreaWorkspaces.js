@@ -15,14 +15,16 @@ function EditorContentAreaWorkspaces(props) {
     const {activeEditortab, editorTabs} = props.contentAreaWorkspace
     const {canvasBottomBar} =props.contentAreaSidebar
     const style={
-        gridTemplateRows: `25px auto 20px`,
+        // gridTemplateRows: `25px auto 20px`,
+        gridTemplateRows: `25px calc( 100vh - 115px) 20px`,
         gridTemplateAreas: `"app-editor-content-area-workspaces-tabs" "app-editor-content-area-workspaces-canvas" "app-editor-content-area-workspaces-footer"`,
     }
 
     let tabHeight = activeEditortab==="" && editorTabs.length===0 ? `` : `25px`
     let canvasHeight = canvasBottomBar ? `30vh` : `20px`;
 
-    style.gridTemplateRows =  `${tabHeight} auto ${canvasHeight}`
+    // style.gridTemplateRows =  `${tabHeight} auto ${canvasHeight}`
+    style.gridTemplateRows =  `${tabHeight} calc( calc(100vh - 95px) - ${canvasHeight} ) ${canvasHeight}`
     style.gridTemplateAreas = `${tabHeight.length>0 && "app-editor-content-area-workspaces-tabs"} "app-editor-content-area-workspaces-canvas" "app-editor-content-area-workspaces-footer"`
 
     return <div className={"app-editor-content-area-workspaces"} style={style}>

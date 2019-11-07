@@ -2,10 +2,12 @@ import React, {useRef, useState, useEffect} from "react";
 import {connect} from 'react-redux'
 import Modal from "../../common/Modal";
 import {contentAreaWorkspaceCreateNewTab} from "../../actions/contentArea";
+import {editorProjectsSidebar} from "../../actions/editor";
 
 const mapStateToProps = (props) => ({})
 const mapDispatchToProps = dispatch => ({
-    contentAreaWorkspaceCreateNewTab: (data) => dispatch(contentAreaWorkspaceCreateNewTab(data))
+    contentAreaWorkspaceCreateNewTab: (data) => dispatch(contentAreaWorkspaceCreateNewTab(data)),
+    editorProjectsSidebar:()=> dispatch(editorProjectsSidebar())
 })
 
 function ProjectDrawer(props) {
@@ -41,6 +43,7 @@ function ProjectDrawer(props) {
                         <button onClick={() => {
                             props.contentAreaWorkspaceCreateNewTab(inputRef.current.value)
                             setShowNewProjectModal(!showNewProjectModal)
+                            props.editorProjectsSidebar()
                         }}>Create
                         </button>
                         <button onClick={() => setShowNewProjectModal(!showNewProjectModal)}>Cancel</button>
