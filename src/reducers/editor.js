@@ -1,7 +1,16 @@
 import { handleActions } from "redux-actions";
-import { ActionTypes } from "../types";
+import { ActionTypes, STATUS } from "../types";
 
-const intialState = {
+const componentSidebarInitialState={
+  drag_status: STATUS.IDLE,
+  drag_data: {
+    nodeType: "",
+    offsetLeft: null,
+    offsetTop: null
+  }
+}
+
+const editorSidebarIntialState = {
   editorLeftSidebar: false,
   editorRightSidebar: false,
   editorComponentSidebar: false,
@@ -10,7 +19,26 @@ const intialState = {
   editorProjectSidebarWidth: "0"
 };
 
+
 export default {
+  componentSidebar: handleActions({
+    [ActionTypes.COMPONENT_NODE_DRAG_START]: (state, action) => Object.assign({}, state, {
+      drag_status: STATUS.RUNNING,
+      drag_data: {
+          nodeType: action.payload.nodeType,
+          offsetLeft: action.payload.offsetLeft,
+          offsetTop: action.payload.offsetTop
+      }
+    }),
+    [ActionTypes.COMPONENT_NODE_DRAG_END]: (state, action) => Object.assign({}, state, {
+      drag_status:  STATUS.IDLE,
+      drag_data: {
+          nodeType: "",
+          offsetLeft: null,
+          offsetTop: null
+      }
+    })
+  },componentSidebarInitialState),
   editorSidebar: handleActions({
       [ActionTypes.EDITOR_COMPONENTS_SIDEBAR]: (state, action) => {
         let status = !state.editorComponentSidebar;
@@ -33,5 +61,5 @@ export default {
         });
       }
     }
-    , intialState)
+    , editorSidebarIntialState)
 };

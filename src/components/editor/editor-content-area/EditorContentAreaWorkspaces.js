@@ -12,16 +12,21 @@ const mapStateToProps = ({contentAreaWorkspace, contentAreaSidebar}) => ({
 const mapDispatchToProps = (dispatch) => ({})
 
 function EditorContentAreaWorkspaces(props) {
-    const {activeEditortab} = props.contentAreaWorkspace
+    const {activeEditortab, editorTabs} = props.contentAreaWorkspace
     const {canvasBottomBar} =props.contentAreaSidebar
     const style={
-        gridTemplateRows: `25px auto 20px`
+        gridTemplateRows: `25px auto 20px`,
+        gridTemplateAreas: `"app-editor-content-area-workspaces-tabs" "app-editor-content-area-workspaces-canvas" "app-editor-content-area-workspaces-footer"`,
     }
 
-    style.gridTemplateRows =  canvasBottomBar ? `25px auto 30vh` : style.gridTemplateRows
+    let tabHeight = activeEditortab==="" && editorTabs.length===0 ? `` : `25px`
+    let canvasHeight = canvasBottomBar ? `30vh` : `20px`;
+
+    style.gridTemplateRows =  `${tabHeight} auto ${canvasHeight}`
+    style.gridTemplateAreas = `${tabHeight.length>0 && "app-editor-content-area-workspaces-tabs"} "app-editor-content-area-workspaces-canvas" "app-editor-content-area-workspaces-footer"`
 
     return <div className={"app-editor-content-area-workspaces"} style={style}>
-        <EditorContentAreaWorkspacesTab/>
+        {tabHeight.length>0 && <EditorContentAreaWorkspacesTab/>}
         {activeEditortab !== "" ?
             <Fragment>
                 <EditorContentAreaWorkspacesCanvas/>

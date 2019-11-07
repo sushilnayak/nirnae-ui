@@ -20,8 +20,18 @@ export const ActionTypes = keyMirror({
 
     WORKSPACE_CANVAS_ADD_NODE: undefined,
     WORKSPACE_UPDATE_NODE: undefined,
+
+    COMPONENT_NODE_DRAG_START: undefined,
+    COMPONENT_NODE_DRAG_END: undefined,
 });
 
+export const STATUS = keyMirror({
+    IDLE: undefined,
+    RUNNING: undefined,
+    READY: undefined,
+    SUCCESS: undefined,
+    ERROR: undefined
+});
 export const CANVAS_STATUS = keyMirror({
     DEFAULT: undefined,
     MOVING: undefined,

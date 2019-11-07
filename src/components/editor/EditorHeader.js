@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-
+import {connect} from 'react-redux';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRunning } from "@fortawesome/free-solid-svg-icons/faRunning";
 import { faSync } from "@fortawesome/free-solid-svg-icons/faSync";
@@ -8,9 +8,15 @@ import { faCode } from "@fortawesome/free-solid-svg-icons/faCode";
 import Modal from "../../common/Modal";
 import { faServer } from "@fortawesome/free-solid-svg-icons/faServer";
 
-export default function EditorHeader() {
-  const [showJson, setShowJson] = useState(false);
+const mapStateToProps = ({contentAreaWorkspace}) => ({
+  contentAreaWorkspace
+})
 
+const mapDispatchToProps = (dispatch) => ({})
+
+function EditorHeader(props) {
+  const [showJson, setShowJson] = useState(false);
+  const {activeEditortab, editorTabs} = props.contentAreaWorkspace
   return (
     <Fragment>
       <div className={"app-editor-header noselect"}>
@@ -45,43 +51,45 @@ export default function EditorHeader() {
       </div>
 
       <div className={"app-editor-sub-header noselect"}>
-        <div className={"app-editor-sub-header-left"} />
-        <div className={"app-editor-sub-header-right"}>
-          <div>
-            <span style={{ color: "green" }}>
-              <FontAwesomeIcon size="sm" icon={faServer} />
-            </span>
-            Deloy
-            <ul>
-              <li>Deploy to Server</li>
-              <li>Update Deployment</li>
-            </ul>
+        { activeEditortab!=="" && editorTabs.length > 0 && <Fragment>
+          <div className={"app-editor-sub-header-left"} />
+          <div className={"app-editor-sub-header-right"}>
+            <div>
+          <span style={{ color: "green" }}>
+          <FontAwesomeIcon size="sm" icon={faServer} />
+          </span>
+              Deloy
+              <ul>
+                <li>Deploy to Server</li>
+                <li>Update Deployment</li>
+              </ul>
+            </div>
+            <div>
+          <span style={{ color: "green" }}>
+          <FontAwesomeIcon size="sm" icon={faRunning} />
+          </span>
+              Run
+            </div>
+            <div>
+          <span style={{ color: "green" }}>
+          <FontAwesomeIcon size="sm" icon={faSync} />
+          </span>
+              ReRun
+            </div>
+            <div>
+          <span style={{ color: "red" }}>
+          <FontAwesomeIcon size="sm" icon={faStop} />
+          </span>
+              Stop
+            </div>
+            <div onClick={() => setShowJson(!showJson)}>
+          <span>
+          <FontAwesomeIcon size="sm" icon={faCode} />
+          </span>
+              JSON
+            </div>
           </div>
-          <div>
-            <span style={{ color: "green" }}>
-              <FontAwesomeIcon size="sm" icon={faRunning} />
-            </span>
-            Run
-          </div>
-          <div>
-            <span style={{ color: "green" }}>
-              <FontAwesomeIcon size="sm" icon={faSync} />
-            </span>
-            ReRun
-          </div>
-          <div>
-            <span style={{ color: "red" }}>
-              <FontAwesomeIcon size="sm" icon={faStop} />
-            </span>
-            Stop
-          </div>
-          <div onClick={() => setShowJson(!showJson)}>
-            <span>
-              <FontAwesomeIcon size="sm" icon={faCode} />
-            </span>
-            JSON
-          </div>
-        </div>
+        </Fragment>}
       </div>
 
       {showJson && (
@@ -97,3 +105,5 @@ export default function EditorHeader() {
     </Fragment>
   );
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditorHeader)

@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import { store } from './../store';
 import { contentAreaWorkspaceCanvasAddNode, contentAreaWorkspaceCanvasUpdateNode } from './../actions/contentArea';
 import { CANVAS_STATUS } from './../types';
-import { FillColor, StrokeColor } from './../utils';
+import { FillColor, StrokeColor } from './../utils/color';
 
 function ChartGenerator(graphId, chartRef, canvasWidth, canvasHeight, gridSize = 20) {
 
@@ -16,6 +16,7 @@ function ChartGenerator(graphId, chartRef, canvasWidth, canvasHeight, gridSize =
   this.scaleFactor = 1;
   this.mouse_mode = CANVAS_STATUS.DEFAULT;
   this.lasso = null;
+  this.mouse_position = null;
 
   this.lineCurveScale = 0.75;
 
@@ -44,6 +45,7 @@ function ChartGenerator(graphId, chartRef, canvasWidth, canvasHeight, gridSize =
   this.gridSize = gridSize;
 
   this.moving_set = [];
+
   this.activeNodes = [];
   this.activeLinks = [];
 
@@ -66,8 +68,36 @@ function ChartGenerator(graphId, chartRef, canvasWidth, canvasHeight, gridSize =
     .append('g')
     .attr('class', 'innerCanvas')
     .on('mousemove', function() {
-      // that.mouse_position = [d3.event.pageX, d3.event.pageY];
+
       that.mouse_position = d3.touches(this)[0] || d3.mouse(this);
+
+      if (that.lasso) {
+        let ox = parseInt(that.lasso.attr("ox"));
+        let oy = parseInt(that.lasso.attr("oy"));
+        let x = parseInt(that.lasso.attr("x"));
+        let y = parseInt(that.lasso.attr("y"));
+        let w;
+        let h;
+        if (that.mouse_position[0] < ox) {
+          x = that.mouse_position[0];
+          w = ox - x;
+        } else {
+          w = that.mouse_position[0] - x;
+        }
+        if (that.mouse_position[1] < oy) {
+          y = that.mouse_position[1];
+          h = oy - y;
+        } else {
+          h = that.mouse_position[1] - y;
+        }
+        that.lasso
+            .attr("x", x)
+            .attr("y", y)
+            .attr("width", w)
+            .attr("height", h)
+        ;
+        return;
+      }
 
       if (that.mouse_mode === CANVAS_STATUS.JOINING) {
 
@@ -102,17 +132,43 @@ function ChartGenerator(graphId, chartRef, canvasWidth, canvasHeight, gridSize =
 
     })
     .on('mousedown', function() {
-      console.log('canvas-mouse-down');
+      let point = d3.mouse(this);
+
+      that.lasso = that.vis.append("rect")
+          .attr("ox", point[0])
+          .attr("oy", point[1])
+          .attr("rx", 1)
+          .attr("ry", 1)
+          .attr("x", point[0])
+          .attr("y", point[1])
+          .attr("width", 0)
+          .attr("height", 0)
+          .attr("class", "nr-ui-view-lasso");
+      d3.event.preventDefault();
+
     })
     .on('mouseup', function() {
-      console.log('canvas-mouseup');
+      if (that.lasso) {
+        let x = parseInt(that.lasso.attr("x"));
+        let y = parseInt(that.lasso.attr("y"));
+        let x2 = x + parseInt(that.lasso.attr("width"));
+        let y2 = y + parseInt(that.lasso.attr("height"));
+
+        console.log(x , y , x2, y2)
+        // TODO : Add logic to get all the nodes to that are there in the range
+        that.lasso.remove();
+        that.lasso = null;
+      }
     })
     .on('mouseenter', function() {
       console.log('canvas-mouseenter');
     })
-    .on('touchend', function() {
-      console.log('canvas-touchend');
-    });
+    .on("mouseleave",function (d) {
+        if (that.lasso) {
+          that.lasso.remove();
+          that.lasso = null;
+        }
+      })
 
   this.outer_background = this.vis.append('rect')
     .attr('width', this.canvasWidth)
@@ -139,7 +195,7 @@ function ChartGenerator(graphId, chartRef, canvasWidth, canvasHeight, gridSize =
 ChartGenerator.prototype.convertDomToSvgCoordinate = function(x, y) {
   let node = d3.select('#chart>svg').node();
   let svgRect = node.createSVGPoint();
-
+  console.log(x,y)
   svgRect.x = x;
   svgRect.y = y;
 
@@ -227,10 +283,7 @@ ChartGenerator.prototype.setActiveNodes = function(activeNodes) {
 };
 
 ChartGenerator.prototype.setActiveLinks = function(activeLinks) {
-
-  console.log(activeLinks);
   const that = this;
-
   activeLinks.map(x => {
 
     for (let i = 0; i < that.activeNodes.length; i++) {
@@ -249,7 +302,8 @@ ChartGenerator.prototype.setActiveLinks = function(activeLinks) {
 
 };
 
-ChartGenerator.prototype.addNodeToCanvas = function(nodetype, _x, _y, color) {
+ChartGenerator.prototype.addNodeToCanvas = function(nodetype, _x, _y) {
+
   let { x, y } = this.convertDomToSvgCoordinate(_x, _y);
 
   const id = (1 + Math.random() * 4294967295).toString(16);
@@ -258,7 +312,6 @@ ChartGenerator.prototype.addNodeToCanvas = function(nodetype, _x, _y, color) {
     nodetype,
     x,
     y,
-    color,
     inputs: 1,
     outputs: 1,
     changed: false,
@@ -266,6 +319,7 @@ ChartGenerator.prototype.addNodeToCanvas = function(nodetype, _x, _y, color) {
     valid: true,
     selected: false
   };
+
   this.activeNodes.push(add);
 
   store.dispatch(contentAreaWorkspaceCanvasAddNode({ id: this.graphId, nodeData: add }));
@@ -311,6 +365,7 @@ ChartGenerator.prototype.updateGrid = function(grid) {
 
 ChartGenerator.prototype.redraw = function() {
   let that = this;
+  console.log("Redraw initiated")
   // console.log('-------------------------');
   // console.log(that.activeLinks);
   // console.log('-------------------------');

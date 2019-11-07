@@ -18,7 +18,12 @@ const mapDispatchToProps = (dispatch) => ({
 function EditorLeftSide(props) {
 
     const {editorLeftSidebar, editorRightSidebar, editorComponentSidebar, editorProjectSidebar} = props.editorSidebar;
-    const {activeEditortab} = props.contentAreaWorkspace
+    const {activeEditortab, editorTabs} = props.contentAreaWorkspace
+
+    if(activeEditortab==="" && editorTabs.length === 0 && !editorProjectSidebar){
+        props.projectsSidebar()
+    }
+
     return (
         <Fragment>
             <div className={"app-editor-left-side noselect"}>

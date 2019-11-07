@@ -20,8 +20,8 @@ export const componentList = [
   { order: 4, id: "mq-recieve"     , type: "MQ" , name: "MQ Reciever" , description: "DummyOperator" },
   { order: 5, id: "function"       , type: "Singular" , name: "Function", description: "SubDagOperator" },
   { order: 5, id: "sas"       , type: "Analytics" , name: "SAS", description: "This component let's you run SAS code based on data passed by previous node" },
-  { order: 5, id: "excel"       , type: "Analytics" , name: "Excel", description: "This component let's you run Excel formulae on data passed by previous node" },
-  { order: 6, id: "s3keysensor"    , type: "Multiple" , name: "S3KeySensor"   , description: "S3KeySensor" },
+  { order: 6, id: "excel"       , type: "Analytics" , name: "Excel", description: "This component let's you run Excel formulae on data passed by previous node" },
+  { order: 7, id: "s3keysensor"    , type: "Multiple" , name: "S3KeySensor"   , description: "S3KeySensor" },
 ];
 
 const ColorScale = function(darkness) {

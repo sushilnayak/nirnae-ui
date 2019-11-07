@@ -1,12 +1,12 @@
 import {handleActions} from "redux-actions";
 import {ActionTypes} from "../types";
 
-const intialState = {
+const contentAreaSidebarIntialState = {
     canvasBottomBar: false,
     canvasWarningAndErrorBar: false,
     canvasStatusBar: false,
     canvasStatisticsBar: false,
-    canvasControlFlowBar: false
+    canvasControlFlowBar: false,
 };
 
 const contentAreaWorkspaceInitialState = {
@@ -63,9 +63,10 @@ export default {
         },
         [ActionTypes.WORKSPACE_CANVAS_ADD_NODE]: (state, action) =>{
             let activeTab = state.activeEditortab
+            let nodeData=state.editorTabCanvas[activeTab].activeNodes
 
             const canvasGraphData={
-                activeNodes: action.payload.nodeData,
+                activeNodes: nodeData,
                 activeLinks: state.editorTabCanvas[activeTab].activeLinks
             }
 
@@ -136,5 +137,5 @@ export default {
                 });
             }
         }
-        , intialState)
+        , contentAreaSidebarIntialState)
 };

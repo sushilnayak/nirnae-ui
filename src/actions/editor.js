@@ -8,3 +8,6 @@ export const editorComponentsSidebar=createAction(ActionTypes.EDITOR_COMPONENTS_
 export const editorProjectsSidebar=createAction(ActionTypes.EDITOR_PROJECTS_SIDEBAR);
 
 
+export const editorComponentNodeDragStart = createAction(ActionTypes.COMPONENT_NODE_DRAG_START);
+export const editorComponentNodeDragEnd = createAction(ActionTypes.COMPONENT_NODE_DRAG_END);
+
