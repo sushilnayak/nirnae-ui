@@ -1,4 +1,4 @@
-import React,{useRef, useEffect} from 'react'
+import React, {useRef, useEffect, Fragment, useState} from 'react'
 import Canvas from "../../Canvas";
 import ChartGenerator from "../../ChartGenerator";
 import {connect} from 'react-redux'
@@ -6,30 +6,41 @@ import {
     canvasControlFlowBar,
     canvasStatisticsBar,
     canvasStatusBar,
-    canvasWarningAndErrorBar
+    canvasWarningAndErrorBar, contentAreaWorkspaceCanvasPropertiesCancel
 } from "../../../actions/contentArea";
+import Modal from "../../../common/Modal";
 
-const mapStateToProps = ({contentAreaWorkspace, componentSidebar}) => ({contentAreaWorkspace, componentSidebar});
+const mapStateToProps = ({contentAreaWorkspace, componentSidebar, contentAreaOperations}) => ({
+    contentAreaWorkspace,
+    componentSidebar,
+    contentAreaOperations
+});
 
 const mapDispatchToProps = (dispatch) => ({
+    contentAreaWorkspaceCanvasPropertiesCancel: ()=> dispatch(contentAreaWorkspaceCanvasPropertiesCancel())
 });
 
 
 function EditorContentAreaWorkspacesCanvas(props) {
     const {activeEditortab, editorTabs, editorTabCanvas} = props.contentAreaWorkspace
     const {drag_data} = props.componentSidebar
+    const {propertiesShow, propertiesNodeType, propertiesNodeId} = props.contentAreaOperations
 
     let canvasRef = useRef(null)
-    let canvas=useRef(null);
+    let canvas = useRef(null);
     let onDrop;
+
+    const propertiesWindowCancel=()=>{
+        props.contentAreaWorkspaceCanvasPropertiesCancel()
+    }
 
     const onDragOver = (ev) => {
         ev.preventDefault();
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log("Tab Loaded!!")
-        canvas.current=new ChartGenerator(activeEditortab, canvasRef, canvasRef.current.clientWidth, canvasRef.current.clientHeight);
+        canvas.current = new ChartGenerator(activeEditortab, canvasRef.current, canvasRef.current.clientWidth, canvasRef.current.clientHeight, 20);
 
         canvas.current.width = canvas.current.clientWidth;
         canvas.current.height = canvas.current.clientHeight;
@@ -41,10 +52,10 @@ function EditorContentAreaWorkspacesCanvas(props) {
         // canvas.current.setActiveLinks(activeLinks);
 
         // canvas.current.redraw()
-        return ()=> canvas.current=null
-    },[])
+        return () => canvas.current = null
+    }, [])
 
-    useEffect(()=>{
+    useEffect(() => {
 
         let activeNodes = editorTabCanvas[activeEditortab].activeNodes;
         let activeLinks = editorTabCanvas[activeEditortab].activeLinks;
@@ -54,16 +65,15 @@ function EditorContentAreaWorkspacesCanvas(props) {
 
         canvas.current.redraw()
 
-    },[editorTabCanvas, activeEditortab, editorTabCanvas[activeEditortab].activeLinks,editorTabCanvas[activeEditortab].activeNodes ])
+    }, [editorTabCanvas, activeEditortab, editorTabCanvas[activeEditortab].activeLinks, editorTabCanvas[activeEditortab].activeNodes])
 
     onDrop = (event) => {
         console.log("canvas")
-        const { nodeType, color, offsetLeft, offsetTop } = props.componentSidebar.drag_data;
-        let x = event.pageX ;
-        let y = event.pageY ;
+        const {nodeType, color, offsetLeft, offsetTop} = props.componentSidebar.drag_data;
+        let x = event.pageX;
+        let y = event.pageY;
         canvas.current.addNodeToCanvas(nodeType, x, y);
     }
-
 
 
     // const [scale, setScale] = React.useState({ x: 1, y: 1 });
@@ -87,13 +97,30 @@ function EditorContentAreaWorkspacesCanvas(props) {
     //     new Canvas(canvas.current, scale.x, scale.y);
     // }, [scale]);
 
-    return <div className={"app-editor-content-area-workspaces-canvas"}
-                id={"chart"}
-                ref={canvasRef}
-                onDragOver={onDragOver}
-                onDrop={onDrop}
-                style={{ width: "100%", height: "100%" }}
-    />
+
+
+    return <Fragment>
+        <div className={"app-editor-content-area-workspaces-canvas"}
+             id={"chart"}
+             ref={canvasRef}
+             onDragOver={onDragOver}
+             onDrop={onDrop}
+             style={{width: "100%", height: "100%"}}
+        />
+        {propertiesShow && <Modal>
+            <div className="modal-content node-properties" >
+                <span className="close" onClick={propertiesWindowCancel}>
+                &times;
+            </span>
+
+                <pre>
+                    <code>{JSON.stringify( editorTabCanvas[activeEditortab].activeNodes.filter(x => x.nodeType===propertiesNodeType && x.id===propertiesNodeId), null ,4 )}</code>
+                </pre>
+
+
+            </div>
+        </Modal>}
+    </Fragment>
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditorContentAreaWorkspacesCanvas)

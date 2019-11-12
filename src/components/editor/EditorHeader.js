@@ -58,7 +58,7 @@ function EditorHeader(props) {
           <span style={{ color: "green" }}>
           <FontAwesomeIcon size="sm" icon={faServer} />
           </span>
-              Deloy
+              Deploy
               <ul>
                 <li>Deploy to Server</li>
                 <li>Update Deployment</li>

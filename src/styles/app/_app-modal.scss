@@ -28,3 +28,29 @@
     justify-content: space-around;
   }
 }
+
+.modal-content.node-properties{
+
+  width: 360px;
+  margin: 0;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+
+  span{
+    float: right;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 0 10px 10px 10px;
+    cursor: pointer;
+  }
+
+  .content{
+    text-align: center;
+    padding: 20px;
+  }
+
+}

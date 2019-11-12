@@ -14,8 +14,37 @@ const contentAreaWorkspaceInitialState = {
     activeEditortab: "",
     editorTabCanvas:{}
 }
+const contentAreaOperationsInitialState = {
+    propertiesShow: false,
+    propertiesNodeType: "",
+    propertiesNodeId: ""
+}
+
 
 export default {
+    contentAreaOperations: handleActions({
+        [ActionTypes.WORKSPACE_CANVAS_SHOW_PROPERTIES]: (state, action) => {
+            return Object.assign({}, state, {
+                propertiesShow: true,
+                propertiesNodeType: action.payload.nodeType,
+                propertiesNodeId: action.payload.nodeId
+            })
+        },
+        [ActionTypes.WORKSPACE_CANVAS_CANCEL_PROPERTIES]: (state, action) => {
+            return Object.assign({}, state, {
+                propertiesShow: false,
+                propertiesNodeType: "",
+                propertiesNodeId: ""
+            })
+        },
+        [ActionTypes.WORKSPACE_CANVAS_OK_PROPERTIES]: (state, action) => {
+            return Object.assign({}, state, {
+                propertiesShow: false,
+                propertiesNodeType: "",
+                propertiesNodeId: ""
+            })
+        }
+    }, contentAreaOperationsInitialState),
     contentAreaWorkspace: handleActions({
         [ActionTypes.WORKSPACE_ADD_TAB]: (state, action) =>{
             let existingTabsList= state.editorTabs;

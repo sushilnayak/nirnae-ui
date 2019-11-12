@@ -23,6 +23,10 @@ export const ActionTypes = keyMirror({
 
     COMPONENT_NODE_DRAG_START: undefined,
     COMPONENT_NODE_DRAG_END: undefined,
+
+    WORKSPACE_CANVAS_SHOW_PROPERTIES  : undefined,
+    WORKSPACE_CANVAS_CANCEL_PROPERTIES: undefined,
+    WORKSPACE_CANVAS_OK_PROPERTIES    : undefined
 });
 
 export const STATUS = keyMirror({

@@ -15,3 +15,7 @@ export const contentAreaWorkspaceCreateNewTab = createAction(ActionTypes.WORKSPA
 
 export const contentAreaWorkspaceCanvasAddNode = createAction(ActionTypes.WORKSPACE_CANVAS_ADD_NODE);
 export const contentAreaWorkspaceCanvasUpdateNode = createAction(ActionTypes.WORKSPACE_UPDATE_NODE);
+
+export const contentAreaWorkspaceCanvasPropertiesShow   = createAction(ActionTypes.WORKSPACE_CANVAS_SHOW_PROPERTIES  )
+export const contentAreaWorkspaceCanvasPropertiesCancel = createAction(ActionTypes.WORKSPACE_CANVAS_CANCEL_PROPERTIES)
+export const contentAreaWorkspaceCanvasPropertiesOk     = createAction(ActionTypes.WORKSPACE_CANVAS_OK_PROPERTIES    )
