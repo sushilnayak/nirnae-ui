@@ -17,12 +17,29 @@ const contentAreaWorkspaceInitialState = {
 const contentAreaOperationsInitialState = {
     propertiesShow: false,
     propertiesNodeType: "",
-    propertiesNodeId: ""
+    propertiesNodeId: "",
+
+    selectedNode: false,
+    selectedNodeId: "",
+    selectedLink: false,
+    selectedLinkId: "",
 }
 
 
 export default {
     contentAreaOperations: handleActions({
+        [ActionTypes.WORKSPACE_CANVAS_SELECT_NODE]: (state, action) => {
+            return Object.assign({}, state, {
+                selectedNode: action.payload.selectedNode,
+                selectedNodeId: action.payload.selectedNodeId
+            })
+        },
+        [ActionTypes.WORKSPACE_CANVAS_SELECT_LINK]: (state, action) => {
+            return Object.assign({}, state, {
+                selectedLink: action.payload.selectedLink,
+                selectedLinkId: action.payload.selectedLinkId
+            })
+        },
         [ActionTypes.WORKSPACE_CANVAS_SHOW_PROPERTIES]: (state, action) => {
             return Object.assign({}, state, {
                 propertiesShow: true,
@@ -45,6 +62,7 @@ export default {
             })
         }
     }, contentAreaOperationsInitialState),
+
     contentAreaWorkspace: handleActions({
         [ActionTypes.WORKSPACE_ADD_TAB]: (state, action) =>{
             let existingTabsList= state.editorTabs;
@@ -107,7 +125,7 @@ export default {
                 editorTabCanvas: existingEditorTabCanvas
             })
         },
-        [ActionTypes.WORKSPACE_UPDATE_NODE]: (state, action) =>{
+        [ActionTypes.WORKSPACE_CANVAS_UPDATE_NODE]: (state, action) =>{
             let activeTab = state.activeEditortab
 
             const canvasGraphData={
