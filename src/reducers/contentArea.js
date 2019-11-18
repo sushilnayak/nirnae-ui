@@ -109,12 +109,33 @@ export default {
             })
         },
         [ActionTypes.WORKSPACE_CANVAS_ADD_NODE]: (state, action) =>{
+            console.log(action.payload)
             let activeTab = state.activeEditortab
             let nodeData=state.editorTabCanvas[activeTab].activeNodes
 
             const canvasGraphData={
                 activeNodes: nodeData,
                 activeLinks: state.editorTabCanvas[activeTab].activeLinks
+            }
+
+            let existingEditorTabCanvas=Object.assign({}, state.editorTabCanvas, {
+                [activeTab] : canvasGraphData
+            })
+
+            return Object.assign({}, state, {
+                editorTabCanvas: existingEditorTabCanvas
+            })
+        },
+        [ActionTypes.WORKSPACE_CANVAS_DELETE_NODE]:(state,action)=>{
+
+            let activeTab = state.activeEditortab
+            let nodeData=state.editorTabCanvas[activeTab].activeNodes.filter(node => node.id!==action.payload)
+
+            let linkData = state.editorTabCanvas[activeTab].activeLinks.filter( link => !(link.source.id === action.payload || link.target.id === action.payload))
+
+            const canvasGraphData={
+                activeNodes: nodeData,
+                activeLinks: linkData
             }
 
             let existingEditorTabCanvas=Object.assign({}, state.editorTabCanvas, {

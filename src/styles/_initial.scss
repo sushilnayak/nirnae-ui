@@ -24,6 +24,7 @@ body, html {
 
 body ::-webkit-scrollbar {
   -webkit-appearance: none;
+  -webkit-font-smoothing: antialiased;
   width: 10px;
   height: 10px;
 }

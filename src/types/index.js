@@ -29,6 +29,7 @@ export const ActionTypes = keyMirror({
 
     WORKSPACE_CANVAS_ADD_NODE: undefined,
     WORKSPACE_CANVAS_UPDATE_NODE: undefined,
+    WORKSPACE_CANVAS_DELETE_NODE: undefined,
 
     COMPONENT_NODE_DRAG_START: undefined,
     COMPONENT_NODE_DRAG_END: undefined,

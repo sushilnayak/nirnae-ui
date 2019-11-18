@@ -14,6 +14,7 @@ export const contentAreaWorkspaceCreateNewTab = createAction(ActionTypes.WORKSPA
 
 export const contentAreaWorkspaceCanvasAddNode = createAction(ActionTypes.WORKSPACE_CANVAS_ADD_NODE);
 export const contentAreaWorkspaceCanvasUpdateNode = createAction(ActionTypes.WORKSPACE_CANVAS_UPDATE_NODE);
+export const contentAreaWorkspaceCanvasDeleteNode = createAction(ActionTypes.WORKSPACE_CANVAS_DELETE_NODE);
 export const contentAreaWorkspaceCanvasSelectNode = createAction(ActionTypes.WORKSPACE_CANVAS_SELECT_NODE);
 export const contentAreaWorkspaceCanvasSelectLink = createAction(ActionTypes.WORKSPACE_CANVAS_SELECT_LINK);
 

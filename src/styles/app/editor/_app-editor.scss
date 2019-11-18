@@ -342,6 +342,7 @@
   }
 
   .app-editor-right-side {
+    z-index: 1;
     grid-area: app-editor-right-side;
 
     background-color: #F2F2F2;
