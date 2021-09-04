@@ -1,6 +1,12 @@
 import { handleActions } from "redux-actions";
 import { ActionTypes, STATUS } from "../types";
 
+const menuBarInitialState={
+  showToolbar: false,
+  deleteType: "",
+  deleteId: ""
+}
+
 const componentSidebarInitialState={
   drag_status: STATUS.IDLE,
   drag_data: {
@@ -21,6 +27,18 @@ const editorSidebarIntialState = {
 
 
 export default {
+  menuBar : handleActions({
+    [ActionTypes.EDITOR_TOGGLE_TOOLBAR] : (state, action) => Object.assign({}, state, {
+      showToolbar: !state.showToolbar
+    }),
+    [ActionTypes.EDITOR_TOOLBAR_DELETE_ACTION]: (state,{payload:{deleteType, deleteId}}) =>{
+      return Object.assign({}, state, {
+        deleteType,
+        deleteId
+      })
+    }
+  }, menuBarInitialState),
+
   componentSidebar: handleActions({
     [ActionTypes.COMPONENT_NODE_DRAG_START]: (state, action) => Object.assign({}, state, {
       drag_status: STATUS.RUNNING,

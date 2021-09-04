@@ -7,6 +7,9 @@ import { ActionTypes } from "../types";
 export const editorComponentsSidebar=createAction(ActionTypes.EDITOR_COMPONENTS_SIDEBAR);
 export const editorProjectsSidebar=createAction(ActionTypes.EDITOR_PROJECTS_SIDEBAR);
 
+export const editorToggleToolbar=createAction(ActionTypes.EDITOR_TOGGLE_TOOLBAR);
+export const editorToolbarDeleteAction=createAction(ActionTypes.EDITOR_TOOLBAR_DELETE_ACTION);
+
 
 export const editorComponentNodeDragStart = createAction(ActionTypes.COMPONENT_NODE_DRAG_START);
 export const editorComponentNodeDragEnd = createAction(ActionTypes.COMPONENT_NODE_DRAG_END);

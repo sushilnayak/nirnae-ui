@@ -10,7 +10,7 @@ import {store} from './../store';
 import {contentAreaWorkspaceCanvasAddNode, contentAreaWorkspaceCanvasUpdateNode} from './../actions/contentArea';
 import {CANVAS_STATUS} from './../types';
 import {componentList, FillColor, StrokeColor} from './../utils/color';
-import {contentAreaWorkspaceCanvasPropertiesShow} from "../actions/contentArea";
+import {contentAreaWorkspaceCanvasPropertiesShow, contentAreaWorkspaceCanvasSelectNode} from "../actions/contentArea";
 
 function ChartGenerator(graphId, svgRef, canvasWidth, canvasHeight, gridSize = 20) {
     console.log("Chart initialized")
@@ -432,9 +432,18 @@ ChartGenerator.prototype.redrawNode = function () {
             //TODO: add properties popup.. Similar to airflow output
         })
         .on("click", function (d) {
-            console.log("Single Clicked")
+
+            let selectStatus=false;
+            let selectedNodeId=""
+
             let newActiveNodes = that.activeNodes.map(x => {
                 x.selected = x.id === d.id ? !d.selected : false
+
+                if(x.selected) {
+                    selectStatus=true;
+                    selectedNodeId=x.id
+                }
+
                 return x;
             })
 
@@ -443,7 +452,13 @@ ChartGenerator.prototype.redrawNode = function () {
                 nodeData: newActiveNodes,
                 linkData: that.activeLinks
             }));
+
+            store.dispatch(contentAreaWorkspaceCanvasSelectNode({
+                selectedNode: selectStatus,
+                selectedNodeId : selectedNodeId
+            }))
         })
+
 
     //TODO: node.each loop to clicl selector
     //

@@ -1,0 +1,21 @@
+.control-flow {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.control-flow td, .control-flow th {
+  border: 1px solid #ddd;
+  padding: 2px;
+}
+
+.control-flow tr:nth-child(even){background-color: #f2f2f2;}
+
+.control-flow tr:hover {background-color: #ddd;}
+
+.control-flow th {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  text-align: left;
+  background-color: gray;
+  color: white;
+}

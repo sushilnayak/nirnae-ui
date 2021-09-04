@@ -1,5 +1,6 @@
-import { all } from "redux-saga/effects";
+import { all , fork} from "redux-saga/effects";
+import editor from './editor'
 
 export default function* index() {
-  yield all([]);
+  yield all([fork(editor)]);
 }

@@ -1,13 +1,37 @@
-import React, { Fragment } from "react";
+import React, {Fragment} from "react";
+import {connect} from 'react-redux'
 
-export default function ControlFlowDrawer() {
-  return <Fragment>
-    <h3>Control Flow</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat.</p>
-    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-      laborum.</p>
-  </Fragment>;
+const mapStateToProps = ({contentAreaWorkspace}) => ({
+    contentAreaWorkspace
+})
+const mapDispatchToProps = dispatch => ({})
+
+function ControlFlowDrawer(props) {
+
+    const {activeEditortab, editorTabCanvas} = props.contentAreaWorkspace
+    let nodeData = editorTabCanvas[activeEditortab].activeNodes
+    console.log(nodeData)
+    return <Fragment>
+        <table className={"control-flow"}>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Node Type</th>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            {nodeData.map((node, i) => <tr key={i}>
+                <td>{node.id}</td>
+                <td>{node.nodetype}</td>
+                <td>{node.nodetype}</td>
+                <td>{node.nodetype}</td>
+            </tr>)}
+
+            </tbody>
+        </table>
+    </Fragment>;
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(ControlFlowDrawer)
